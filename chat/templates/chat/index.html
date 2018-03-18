@@ -1,16 +1,16 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
+
+{% block title %}
     <title>Join Room| Bit Chat</title>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
     What chat room would you like to enter?<br/>
     <input id="room-name-input" type="text" size="100"/><br/>
     <input class="btn btn-primary" id="room-name-submit" type="button" value="Enter"/>
-</body>
+{% endblock %}
 {% block script %}
+<script>
     document.querySelector('#room-name-input').focus();
     document.querySelector('#room-name-input').onkeyup = function(e) {
         if (e.keyCode === 13) {  // enter, return
@@ -23,4 +23,5 @@
         window.location.pathname = '/chat/' + roomName;
     };
 {% endblock %}
+</script>
 </html>
