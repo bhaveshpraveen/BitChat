@@ -21,7 +21,7 @@ def room(request, room_name):
         'room_name': room_name
     }
     if not created:
-        context['messages'] = obj.messages.all()[:50]
+        context['messages'] = obj.messages.all().order_by('created')[0:50]
 
     return render(request, "chat/room.html", context)
 

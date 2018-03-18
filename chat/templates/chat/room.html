@@ -1,27 +1,115 @@
 {% extends "base.html" %}
 
 {% block title %} {{ room_name }}| Bitchat {% endblock title %}
+
+{% block style %}
+.message-input {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    left: 0;
+    right: 0;
+}
+
+.card {
+    padding: 7px;
+    margin: 5px;
+}
+{% endblock %}
+
 {% block content %}
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
-    <input id="chat-message-input" type="text" size="100"/><br/>
-    <input class="btn btn-primary" id="chat-message-submit" type="button" value="Send"/>
+
+    <div class="container" id="app">
+
+        <div id="card-list" style="font-size: 15px; padding-bottom:35px;">
+            {% for message in messages %}
+                <div class="row msg-left">
+                    <div class="col-10 ">
+                        {% if request.user == message.owner %}
+                            <div class="card" style="background-color: #eeeeee">
+                                <p class="card-text">
+                                    <b>You</b>
+                                    <br>{{ message.text }}</p>
+                            </div>
+                        {% else %}
+                            <div class="card">
+                                <p class="card-text">
+                                    <b>{{ message.owner.username }}</b>
+                                    <br>{{ message.text }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="message-input container">
+            <div class="row">
+                <div class="col col-10">
+                    <input id="chat-message-input" type="text" class="form-control" placeholder="Enter message to send">
+                </div>
+                <div class="col">
+                    <!-- <button id="chat-message-submit" type="button" class="btn btn-primary">SEND</button> -->
+                    <input class="btn btn-primary" id="chat-message-submit" type="button" value="Send"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- <input id="chat-message-input" type="text" size="100"/><br/> -->
+    <!-- <input class="btn btn-primary" id="chat-message-submit" type="button" value="Send"/> -->
 {% endblock content %}
 
 {% block script %}
 <script>
+    window.scrollTo(0,document.querySelector("#card-list").scrollHeight);
+
     var roomName = {{ room_name_json }};
-    console.log(roomName)
+    console.log(roomName);
 
     var chatSocket = new WebSocket(
         'ws://' + window.location.host +
         '/ws/chat/' + roomName + '/');
 
     chatSocket.onmessage = function(e) {
-        console.log(e.data);
-//        var data = JSON.parse(e.data);
-//        var user = data['user'];
-//        var message = data['message'];
-//        document.querySelector('#chat-log').value += user +  ": " + (message + '\n');
+        // console.log(e.data);
+        var data = JSON.parse(e.data);
+        var user = data['user'];
+        var message = data['message'];
+        console.log(message);
+
+        var fragHtml = `
+            <div class="row msg-left">
+                <div class="col-10 ">
+        `;
+        if(message['sent_by'] == user) {
+            fragHtml  = fragHtml + `
+                <div class="card" style="background-color: #eeeeee">
+                    <p class="card-text">
+                        <b>You</b>
+                        <br>` + message['message'] + `</p>
+                </div>
+            `;
+        } else {
+            fragHtml  = fragHtml + `
+                <div class="card">
+                    <p class="card-text">
+                        <b>` + message['sent_by'] + `</b>
+                        <br>` + message['message'] + `</p>
+                </div>
+            `;
+        }
+        fragHtml = fragHtml + `
+                </div>
+            </div>
+        `;
+
+        var fragment = create(fragHtml);
+        document.getElementById("card-list").appendChild(fragment);
+
+        window.scrollTo(0,document.querySelector("#card-list").scrollHeight);
     };
 
     chatSocket.onclose = function(e) {
@@ -44,6 +132,16 @@
 
         messageInputDom.value = '';
     };
+
+    function create(htmlStr) {
+        var frag = document.createDocumentFragment(),
+            temp = document.createElement('div');
+        temp.innerHTML = htmlStr;
+        while (temp.firstChild) {
+            frag.appendChild(temp.firstChild);
+        }
+        return frag;
+    }
     </script>
 {% endblock %}
 </html>
