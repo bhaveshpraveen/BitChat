@@ -1,5 +1,7 @@
 import json
 
+from django.core import serializers
+
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 
@@ -24,12 +26,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data = json.loads(text_data)
         message = text_data['message']
 
-        await self.add_message(message)
+        msg = await self.add_message(message)
 
-        await self.channel_layer.group_send(self.room_group_name, {
-                                                        'type': 'chat_message',
-                                                        'message': message
-                                                        })
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                'type': 'chat_message',
+                'message': msg.text,
+                'sent_by': msg.owner.username,
+                'time': str(msg.created)
+             })
 
     @database_sync_to_async
     def get_room(self):
@@ -44,11 +50,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # The `message` that is passed above will be available as an event in
     # `chat_message`
     async def chat_message(self, event):
-        message = event['message']
-
+        print(event)
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
-            'message': message,
+            'message': event,
             'user': self.scope['user'].username
         }))
    
