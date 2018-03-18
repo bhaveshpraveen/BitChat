@@ -32,6 +32,7 @@ Create a `credentials.txt` file in the root directory of the project. I've set t
 add your email in the first line and your password in the following line. Or you could use environment variables, change the code accordingly in the
 `settings.py` file.
 
+And then finally run: 
 ```sh
 python3 manage.py runserver
 ```
