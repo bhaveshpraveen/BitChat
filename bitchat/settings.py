@@ -160,3 +160,5 @@ EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 LOGOUT_REDIRECT_URL = reverse_lazy('registration_register')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
