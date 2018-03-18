@@ -13,7 +13,7 @@ User Registration through [Registration package](https://django-registration.rea
 Templates for the registration obtained from [macdhuibh/django-registration-templates
 ](https://github.com/macdhuibh/django-registration-templates).
 
-### Getting Setup
+### Setup
 ```sh
 pip install -r requirements.txt
 ```
