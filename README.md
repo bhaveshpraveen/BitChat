@@ -8,10 +8,13 @@ This is an extension/fork of the [Django Channels tutorial](https://channels.rea
 - Messages are now stored in Database
 - Added User Registration
 
-The messages are now persistent and they can accessed across different sessions.
-User Registration through [Registration package](https://django-registration.readthedocs.io/en/2.4.1/).
+The messages are now persistent and they can accessed across different sessions.  
+
+User Registration through [Registration package](https://django-registration.readthedocs.io/en/2.4.1/).  
+
 Templates for the registration obtained from [macdhuibh/django-registration-templates
-](https://github.com/macdhuibh/django-registration-templates).
+](https://github.com/macdhuibh/django-registration-templates).  
+
 
 ### Setup
 ```sh
