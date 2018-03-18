@@ -1,9 +1,9 @@
 {% load i18n %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 <form method="post" action=".">
   {% csrf_token %} 
-  {{ form.as_p }}
+  {{ form|crispy }}
 
   <input type="submit" value="{% trans 'Log in' %}" />
   <input class="btn btn-primary" type="hidden" name="next" value="{{ next }}" />

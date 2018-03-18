@@ -1,3 +1,4 @@
+{% extends "base.html" %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,7 @@
     <input id="room-name-input" type="text" size="100"/><br/>
     <input class="btn btn-primary" id="room-name-submit" type="button" value="Enter"/>
 </body>
-<script>
+{% block script %}
     document.querySelector('#room-name-input').focus();
     document.querySelector('#room-name-input').onkeyup = function(e) {
         if (e.keyCode === 13) {  // enter, return
@@ -21,5 +22,5 @@
         var roomName = document.querySelector('#room-name-input').value;
         window.location.pathname = '/chat/' + roomName;
     };
-</script>
+{% endblock %}
 </html>

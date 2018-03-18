@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>{{ room_name }}| Bitchat</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %} {{ room_name }}| Bitchat {% block title %}
+{% block content %}
     <textarea id="chat-log" cols="100" rows="20"></textarea><br/>
     <input id="chat-message-input" type="text" size="100"/><br/>
     <input class="btn btn-primary" id="chat-message-submit" type="button" value="Send"/>
-</body>
+{% block content %}
+
+{% block script %}
 <script>
     var roomName = {{ room_name_json }};
     console.log(roomName)
@@ -45,5 +44,6 @@
 
         messageInputDom.value = '';
     };
-</script>
+    </script>
+{% endblock %}
 </html>
