@@ -4,10 +4,24 @@
     <title>Join Room| Bit Chat</title>
 {% endblock %}
 
+{% block style %}
+.container, .row.justify-content-center.align-items-center {
+    height: 100%;
+    min-height: 100%;
+  }
+{% endblock %}
+
 {% block content %}
-    What chat room would you like to enter?<br/>
-    <input id="room-name-input" type="text" size="100"/><br/>
-    <input class="btn btn-primary" id="room-name-submit" type="button" value="Enter"/>
+    <div class="container h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-10">
+                <input id="room-name-input" type="text" size="100" class="form-control" placeholder="What chat room would you like to enter?">
+            </div>
+            <div class="col">
+                <input class="btn btn-primary" id="room-name-submit" type="button" value="Enter"/>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block script %}
 <script>
