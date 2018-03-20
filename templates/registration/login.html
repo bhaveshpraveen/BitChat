@@ -12,6 +12,7 @@
 <div class="container h-100">
     <div class="row h-100 justify-content-center align-items-center">
         <form class="col col-sm-12 col-md-4" method="post" action=".">
+
             {% csrf_token %} 
             {{ form|crispy }}
           
