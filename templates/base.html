@@ -5,50 +5,60 @@
 
 <head> 
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
     <title>{% block title %}BitChat{% endblock %}</title>
 </head>
 
 <style>
+  html,
+  body {
+    height: 100%;
+    width: 100%;
+    /* background-color: red; */
+    background-image: url("http://i.imgur.com/TnNwdvV.png");
+  }
+  #content {
+    padding-top:60px;
+  }
+  nav a {
+    color: white;
+  }
 {% block style %}
-
+ 
 {% endblock %}
 </style>
 <body>
     <div id="header">
     {% block header %}
         <!--NavBar goes here-->
-        <nav class="navbar fixed-top navbar-toggleable-md navbar-light bg-faded">
+        <nav class="navbar fixed-top navbar-toggleable-md navbar-inverse text-light bg-primary">
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <a class="navbar-brand" href="#">Navbar</a>
-
+          <a class="navbar-brand" href="#">BitChat</a>
+        
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-              </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <!-- <button class="btn btn-outline mr-sm-2" type="submit">Join another channel</button>
+              <button class="btn btn-outline my-2 my-sm-0" type="submit">Logout</button> -->
+              <a class="nav-link" href="{% url 'index' %}">Another Chat Room</a>
+              <a class="nav-link" href="{% url 'auth_logout' %}">Logout</a>
             </form>
           </div>
         </nav>
     {% endblock %}
     </div>
 
-    <div id="content">
+    <div id="content" class="h-100">
     {% block content %}{
 
     {% endblock %}
@@ -56,7 +66,7 @@
 
     <div id="footer">
     {% block footer %}
-        <hr />
+        <!-- <hr/> -->
     {% endblock %}
     </div>
 </body>

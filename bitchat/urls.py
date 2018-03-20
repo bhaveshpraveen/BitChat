@@ -15,11 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
 
 from django.contrib.auth.views import LoginView
 
-urlpatterns = [
+def redirect_views(request):
+    return redirect('index')
+
+urlpatterns = [ 
     path('admin/', admin.site.urls),
     path('chat/', include('chat.urls')),
     path('accounts/', include('registration.backends.hmac.urls')),
+    path('', redirect_views),
 ]
+
