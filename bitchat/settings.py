@@ -53,7 +53,8 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            # my ip
+            "hosts": [('172.23.0.1', 6379)],
         },
     },
 }
@@ -110,6 +111,8 @@ DATABASES = {
         'PORT': 5432,
     }
 }
+
+
 
 
 # Password validation
