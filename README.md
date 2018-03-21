@@ -28,7 +28,7 @@ pip install virtualenv
 - Create a virtual environment
 ```sh
 virtualenv /path/to/virtualenv
-Replace /path/to/virtualenv with the path in which you want to save your virtual environment
+# Replace /path/to/virtualenv with the path in which you want to save your virtual environment
 ```
 
 - Activate your virtual environment
@@ -42,7 +42,7 @@ source /path/to/virtualenv/bin/activate
 pip install -r requirements.txt
 ```
 
-- You also need to have PostgresSql installed in your machine. 
+- You also need to have PostgresSql installed in your machine.
 
 - Make sure you have redis installed or you could use the docker image as specified in the Django Channels Documentation
 If you're going to use docker, make sure you have Docker installed and run the following command
@@ -50,7 +50,7 @@ If you're going to use docker, make sure you have Docker installed and run the f
 docker run -p 6379:6379 -d redis:2.8
 ```
 
-- If you have `redis-server` already installed in your pc. Run this command in your shell
+Or If you have `redis-server` already installed in your pc. Run this command in your shell
 ```sh
 redis-server
 ```
